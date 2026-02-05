@@ -1,13 +1,13 @@
 import {motion, scale} from "framer-motion";
-import logo from "../assets/logo.jpeg";
+import logo from "../assets/logo.png";
 
 export default function Navbar(){
     return(
         <header className="topbar">
             <div className="container topbar__inner">
                 <div className="brand">
-                    <img className="brand_logo" src={logo} alt="RAMB"/>
-                    <span className="brand__name">RAMB</span>
+                    <img className="brand__logo" src={logo} alt="RAMB"/>
+                    <span className="brand__name"></span>
                 </div>
 
                 <div className="topbar__right">

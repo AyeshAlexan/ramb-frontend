@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import personal from "../icons/personal.jpeg";
 import sme from "../icons/sme.png";
 import pawn from "../icons/pawn.jpg";
@@ -13,23 +12,30 @@ const items =[
 export default function Highlights(){
     return(
         <section className="highlights">
-            <div className="container hightlights__grid">
-                {items.map((it, idx)=>(
-                    <motion.article
-                    key={it.title}
-                    className="card card--shadow"
-                    initial={{opacity: 0, y: 16}}
-                    whileInView={{opacity:1, y:0}}
-                    viewport={{once: true, amount: 0.3}}
-                    transition={{duration: 0.45, delay: idx*0.06}}
-                    >
-                        <img className="card__icon" src={it.img} alt={it.title}/>
-                        <div>
-                            <h3>{it.title}</h3>
-                            <p>{it.desc}</p>
-                        </div>
-                    </motion.article>
-                ))}
+            <div className="container">
+                <div className="highlights__inner">
+                    <div className="highlights__tag">Not a Bank: Supporting Your Dreams.</div>
+                    <div className="highlights__grid">
+                        {items.map((it, idx)=>(
+                            <motion.article
+                              key={it.title}
+                              className="card card--shadow highlightCard"
+                              initial={{opacity: 0, y: 16}}
+                              whileInView={{opacity:1, y:0}}
+                              viewport={{once: true, amount: 0.3}}
+                              transition={{duration: 0.45, delay: idx*0.06}}
+                            >
+                                <div className="card__iconWrap">
+                                    <img className="card__icon" src={it.img} alt={it.title}/>
+                                </div>
+                                <div className="card__body">
+                                    <h3>{it.title}</h3>
+                                    <p>{it.desc}</p>
+                                </div>
+                            </motion.article>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );

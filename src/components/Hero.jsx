@@ -1,5 +1,6 @@
 import {motion} from "framer-motion";
 import hero from "../assets/hero.png";
+import styles from "../styles/global.css";
 
 
 export default function Hero(){
@@ -29,9 +30,6 @@ export default function Hero(){
               </motion.a>
             </motion.div>
 
-            <div className="hero__tagline">
-                <span>Not a Bank: Supporting Your Dreams.</span>
-            </div>
             </div>
         </section>
     );

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import car from "../assets/car.png";
+import styles from "../styles/global.css";
 
 export default function CallRamb() {
   return (
