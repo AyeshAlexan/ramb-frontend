@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-import personal from "../icons/peraonal.jpeg";
+import personal from "../icons/personal.jpeg";
 import sme from "../icons/sme.png";
 import pawn from "../icons/pawn.jpg";
 
