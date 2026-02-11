@@ -1,0 +1,187 @@
+.loansPage {
+  background: #f3f5f7;
+  min-height: 100vh;
+}
+
+.loansHeader {
+  background: #f3f5f7;
+  padding: 22px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.loansHeader h1 {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: #0c0f14;
+}
+
+/* layout */
+.loansWrap {
+  max-width: 1200px;
+  margin: 26px auto 60px;
+  padding: 0 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 980px) {
+  .loansWrap { grid-template-columns: 1fr; }
+}
+
+/* card */
+.loanCard {
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(9, 30, 66, 0.10);
+  transform: translateY(10px);
+  opacity: 0;
+  animation: popIn 520ms ease forwards;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+@keyframes popIn {
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.loanTopStrip {
+  position: relative;
+  height: 190px;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+}
+
+/* left image area */
+.stripCol {
+  position: relative;
+  overflow: hidden;
+}
+
+.stripImg {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05);
+  transform: scale(1.02);
+}
+
+.stripBadge {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  z-index: 2;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(12, 20, 35, 0.72);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+}
+
+/* right panels (multi-strip vibe like your 2nd image) */
+.stripPanels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.stripPanels .panel {
+  opacity: 0.95;
+}
+
+/* default (blue-ish) */
+.accent-blue .p1 { background: #1f6feb; }
+.accent-blue .p2 { background: #2b90ff; }
+.accent-blue .p3 { background: #7cc4ff; }
+
+/* teal (business) */
+.accent-teal .p1 { background: #0ea5a4; }
+.accent-teal .p2 { background: #22c1a8; }
+.accent-teal .p3 { background: #7cf1c9; }
+
+/* purple (education) */
+.accent-purple .p1 { background: #7c3aed; }
+.accent-purple .p2 { background: #a855f7; }
+.accent-purple .p3 { background: #d8b4fe; }
+
+/* circle chip like the “flag circle” feeling */
+.stripChip {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  color: #0b1220;
+  background: rgba(255,255,255,0.92);
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+  backdrop-filter: blur(10px);
+}
+
+.loanBody {
+  padding: 18px 18px 20px;
+}
+
+.loanBody h2 {
+  margin: 0 0 8px;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  color: #0c0f14;
+}
+
+.loanBody p {
+  margin: 0 0 16px;
+  color: rgba(12, 15, 20, 0.72);
+  line-height: 1.55;
+  font-size: 14.5px;
+}
+
+/* buttons (gold like your site) */
+.loanActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.loanBtn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 800;
+  background: #d4a53a; /* gold */
+  color: #0b1220;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+  box-shadow: 0 10px 18px rgba(212, 165, 58, 0.35);
+}
+
+.loanBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.loanBtnOutline {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 800;
+  background: transparent;
+  border: 1.5px solid rgba(12, 15, 20, 0.20);
+  color: #0b1220;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.loanBtnOutline:hover {
+  transform: translateY(-1px);
+  background: rgba(12, 15, 20, 0.04);
+}
