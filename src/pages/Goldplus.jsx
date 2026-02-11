@@ -14,7 +14,6 @@ export default function GoldPlus() {
         <div className="gpHeroImg">
           <img src={heroImg} alt="Gold Plus" />
           <div className="gpImgOverlay" />
-          <div className="gpImgBadge">Gold Plus</div>
         </div>
 
         <div className="gpHeroContent">
