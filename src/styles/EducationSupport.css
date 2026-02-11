@@ -1,0 +1,142 @@
+.eduPage {
+  background: #f3f5f7;
+  min-height: 100vh;
+}
+
+.eduHeader {
+  padding: 22px 18px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.eduHeader h1 {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 800;
+  color: #0c0f14;
+}
+
+.eduHero {
+  max-width: 1200px;
+  margin: 30px auto 36px;
+  padding: 0 18px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 980px) {
+  .eduHero { grid-template-columns: 1fr; }
+}
+
+/* Big image box */
+.eduHeroImg {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px rgba(9, 30, 66, 0.10);
+  min-height: 360px;
+}
+
+.eduHeroImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+}
+
+.eduImgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(12, 20, 35, 0.55),
+    rgba(12, 20, 35, 0.05)
+  );
+}
+
+.eduImgBadge {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.88);
+  color: #0b1220;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(10px);
+}
+
+/* Content card */
+.eduHeroContent {
+  background: #fff;
+  border-radius: 22px;
+  padding: 32px;
+  box-shadow: 0 14px 30px rgba(9, 30, 66, 0.10);
+  border: 1px solid rgba(0,0,0,0.06);
+  animation: rise 520ms ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes rise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eduHeroContent h2 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 900;
+  color: #0c0f14;
+}
+
+.eduHeroContent p {
+  margin: 0 0 20px;
+  color: rgba(12, 15, 20, 0.72);
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+/* Buttons (same gold style) */
+.eduActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.eduBtn {
+  border: 0;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-weight: 900;
+  font-size: 15px;
+  background: #d4a53a;
+  color: #0b1220;
+  box-shadow: 0 10px 18px rgba(212, 165, 58, 0.35);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.eduBtn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.eduBtnOutline {
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-weight: 900;
+  font-size: 15px;
+  background: transparent;
+  border: 1.5px solid rgba(12, 15, 20, 0.20);
+  color: #0b1220;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.eduBtnOutline:hover {
+  transform: translateY(-1px);
+  background: rgba(12, 15, 20, 0.04);
+}

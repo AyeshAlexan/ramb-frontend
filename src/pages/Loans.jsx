@@ -38,7 +38,7 @@ export default function LoansPage() {
     <div className="loansPage">
       {/* Page title area like your screenshot */}
       <div className="loansHeader">
-        <h1>Loans Page</h1>
+        <h1>Explore Our Loan Options</h1>
       </div>
 
       <div className="loansWrap">
