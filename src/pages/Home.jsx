@@ -4,13 +4,47 @@ import "../styles/global.css";
 
 import heroImg from "../assets/hero.png";
 
-// ✅ use your 3 different images here
+// ✅ About images
 import aboutImg1 from "../assets/about-circle.png";
 import aboutImg2 from "../assets/about-2.png.jpg";
-import aboutImg3 from "../assets/about-3.jpg";
+
+// ✅ Our Team Images
+import founder from "../assets/our team/Founder & Principal Investor.jpeg";
+import director from "../assets/our team/Director.jpeg";
+import Chief from "../assets/our team/Chief Operating Officer.jpeg";
+import ABF from "../assets/our team/Adivsory Board Finance.jpeg";
+import ABE from "../assets/our team/Advisory Board Education .jpeg";
+import ABP from "../assets/our team/Advisory Board Premises.jpeg";
+import ABM from "../assets/our team/Advisory Board Management.jpeg";
+import Finance from "../assets/our team/Finance and compliance  officer.jpeg";
+import FManger from "../assets/our team/Former manager.jpeg";
+import Manager from "../assets/our team/Manager.jpeg";
+import AM1 from "../assets/our team/Assistant Manager1.jpeg";
+import AM2 from "../assets/our team/Assistant Manager2.jpeg";
+import EX1 from "../assets/our team/Executive Trainer1.jpeg";
+import Manager1 from "../assets/our team/Manager1.jpeg";
+import AM3 from "../assets/our team/Assistant Manager3.jpeg";
+import EX2 from "../assets/our team/Executive trainer2.jpeg";
+import EX3 from "../assets/our team/Executive trainer3.jpeg";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
+
+  // ✅ reveal animation for service strip
+  useEffect(() => {
+    const els = document.querySelectorAll(".svcReveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("show");
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <main>
@@ -51,6 +85,58 @@ export default function Home() {
         </div>
       </section>
 
+      {/* SERVICES STRIP */}
+      <section className="svcStrip">
+        <div className="svcStripInner">
+          <div className="svcStripHeader reveal svcReveal">
+            <span className="svcLine" />
+            <h3 className="svcStripTitle">Not a Bank: Supporting Your Dreams.</h3>
+            <span className="svcLine" />
+          </div>
+
+          <div className="svcCards">
+            <div
+              className="svcCard reveal svcReveal"
+              style={{ transitionDelay: "0ms" }}
+            >
+              <div className="svcIcon">🤝</div>
+              <div className="svcText">
+                <div className="svcCardTitle">Personal Loans</div>
+                <div className="svcCardDesc">
+                  Flexible personal loans for any need.
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="svcCard reveal svcReveal"
+              style={{ transitionDelay: "90ms" }}
+            >
+              <div className="svcIcon">🏪</div>
+              <div className="svcText">
+                <div className="svcCardTitle">SME Loans</div>
+                <div className="svcCardDesc">
+                  Funding solutions for businesses.
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="svcCard reveal svcReveal"
+              style={{ transitionDelay: "180ms" }}
+            >
+              <div className="svcIcon">💰</div>
+              <div className="svcText">
+                <div className="svcCardTitle">Pawn Loans</div>
+                <div className="svcCardDesc">
+                  Instant cash for your gold &amp; valuables.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT */}
       <section id="about" className="lpSection">
         <div className="lpSectionInner">
@@ -64,7 +150,7 @@ export default function Home() {
           </div>
 
           <div className="aboutGrid">
-            {/* ✅ LEFT: 3 Circle Images with layout switch + fade-in */}
+            {/* LEFT: Circle Images + fade in */}
             <AboutReveal>
               <div className="aboutLeft">
                 <div className={`aboutCircleGroup ${open ? "open" : ""}`}>
@@ -83,14 +169,6 @@ export default function Home() {
                       className="aboutCircleImg"
                     />
                   </div>
-
-                  <div className="aboutCircleWrap sm">
-                    <img
-                      src={aboutImg3}
-                      alt="About 3"
-                      className="aboutCircleImg"
-                    />
-                  </div>
                 </div>
               </div>
             </AboutReveal>
@@ -99,7 +177,7 @@ export default function Home() {
             <div className="aboutRight">
               <h3 className="aboutTitle">About RAMB</h3>
 
-              {/* ✅ Top paragraph now has same outline card */}
+              {/* Top paragraph card */}
               <div className="aboutOutlineCard">
                 <p className="aboutText">
                   Reliable Asset Management &amp; Business (RAMB) represents a
@@ -111,7 +189,7 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* ✅ When closed, show View More here */}
+              {/* View More button only when closed */}
               {!open && (
                 <button
                   className="lpBtnPrimary aboutToggleBtn"
@@ -123,11 +201,8 @@ export default function Home() {
                 </button>
               )}
 
-              {/* ✅ Slide-down expandable content (no modal) */}
-              <div
-                id="about-more"
-                className={`aboutMore ${open ? "open" : ""}`}
-              >
+              {/* Slide-down content (About ONLY) */}
+              <div id="about-more" className={`aboutMore ${open ? "open" : ""}`}>
                 <div className="aboutMoreInner">
                   <div className="aboutMoreCard">
                     <p className="aboutMoreText">
@@ -154,93 +229,7 @@ export default function Home() {
                     </p>
                   </div>
 
-                  <h4 className="teamMainTitle">Our Team</h4>
-
-                  <TeamGroup
-                    title="Board of Directors"
-                    members={[
-                      {
-                        name: "John Smith",
-                        role: "Chairman",
-                        desc: "Financial services, 25+ years, former Director at UK banks.",
-                      },
-                      {
-                        name: "Hiroshi Tanaka",
-                        role: "Director of Finance",
-                        desc: "Chartered Accountant, treasury management, and financial planning.",
-                      },
-                      {
-                        name: "Maria Lopez",
-                        role: "Director of Operations",
-                        desc: "Logistics and operations management in global corporates.",
-                      },
-                      {
-                        name: "Chen Wei",
-                        role: "Director of Marketing",
-                        desc: "Digital marketing, brand development, and relationship strategies.",
-                      },
-                    ]}
-                  />
-
-                  <TeamGroup
-                    title="Executive Management"
-                    members={[
-                      {
-                        name: "I.A.T.N. Rajah",
-                        role: "Chief Executive Officer (CEO)",
-                        desc: "Strategic leadership, finance, and business advisory.",
-                      },
-                      {
-                        name: "Alex Johnson",
-                        role: "Chief Technology Officer (CTO)",
-                        desc: "Software development, cybersecurity, and ethical solutions.",
-                      },
-                      {
-                        name: "Priya Kumar",
-                        role: "Chief Compliance Officer (CCO)",
-                        desc: "Regulatory compliance and risk management in banking and finance.",
-                      },
-                    ]}
-                  />
-
-                  <TeamGroup
-                    title="Operational Heads"
-                    members={[
-                      {
-                        name: "Anil Sharma",
-                        role: "Head of Customer Service",
-                        desc: "CRM tools, customer experience management, and process improvement.",
-                      },
-                      {
-                        name: "James Brown",
-                        role: "Head of Legal Affairs",
-                        desc: "Corporate law, international regulations, and compliance for planning.",
-                      },
-                    ]}
-                  />
-
-                  <TeamGroup
-                    title="Branch Management"
-                    members={[
-                      {
-                        name: "R. Jayasekaran",
-                        role: "Operations Executive",
-                        desc: "Branch operations, customer relations, and team leadership.",
-                      },
-                      {
-                        name: "Various – Sri Lankan",
-                        role: "Executive Staff",
-                        desc: "Day-to-day operations, client servicing, and administrative tasks.",
-                      },
-                      {
-                        name: "Various – Sri Lankan",
-                        role: "Interns (INT)",
-                        desc: "Supporting sales & operations, customer service, and project management.",
-                      },
-                    ]}
-                  />
-
-                  {/* ✅ Bottom actions */}
+                  {/* Bottom actions */}
                   <div className="aboutMoreActions">
                     <a className="lpBtnPrimary" href="#contact">
                       Contact
@@ -255,14 +244,44 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* ✅ When open, hide the top button and still allow closing at bottom */}
+              {/* Link to team */}
+              <div style={{ marginTop: 14 }}>
+                <a className="lpBtnGhost" href="#team">
+                  Meet Our Team →
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* TEAM (TREE DIAGRAM) */}
+      <section id="team" className="lpSection lpSectionAlt">
+        <div className="lpSectionInner">
+          <div className="lpTopCenter">
+            <div className="lpKicker">OUR TEAM</div>
+            <h2 className="lpH2">Corporate Organizational Structure</h2>
+            <p className="lpCenterText">
+              A modern view of the RAMB structure — leadership, advisory boards,
+              and operations.
+            </p>
+          </div>
+
+          <OrgChart />
+
+          <div className="aboutMoreActions" style={{ marginTop: 20 }}>
+            <a className="lpBtnPrimary" href="#contact">
+              Contact
+            </a>
+            <a className="lpBtnGhost" href="#home">
+              Back to Top
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
-      <section id="contact" className="lpSection lpSectionAlt">
+      <section id="contact" className="lpSection">
         <div className="lpSectionInner">
           <div className="lpTopCenter">
             <div className="lpKicker">CONTACT</div>
@@ -279,7 +298,7 @@ export default function Home() {
                 <div className="infoIcon">📞</div>
                 <div>
                   <div className="infoLabel">Phone</div>
-                  <div className="infoValue">021-222-4220</div>
+                  <div className="infoValue">021 222 4220 / 021 222 6990</div>
                 </div>
               </div>
 
@@ -295,7 +314,9 @@ export default function Home() {
                 <div className="infoIcon">📍</div>
                 <div>
                   <div className="infoLabel">Address</div>
-                  <div className="infoValue">Colombo, Sri Lanka</div>
+                  <div className="infoValue">
+                    No 29, Muneeswaran Road, 40000, Jaffna.
+                  </div>
                 </div>
               </div>
             </div>
@@ -350,49 +371,147 @@ function AboutReveal({ children }) {
   );
 }
 
-function TeamGroup({ title, members }) {
-  return (
-    <div className="teamGroup">
-      <div className="teamGroupTitle">{title}</div>
+/* ---------------------------
+   Org Chart (Tree Diagram)
+---------------------------- */
 
-      <div className="teamGrid2">
-        {members.map((m, i) => (
-          <TeamCard key={i} index={i} {...m} />
+function OrgChart() {
+  const data = {
+    leadership: [
+      {
+        name: "Mrs. M. Abreame",
+        role: "Founder & Principal Investor",
+        img: founder,
+      },
+      {
+        name: "Mr. V. Thillainadarajah",
+        role: "Chief Executive Officer (CEO)",
+        img: director,
+      },
+      {
+        name: "Mrs. T. Thillainadarajah",
+        role: "Chief Operating Officer (COO)",
+        img: Chief,
+      },
+    ],
+    advisory: [
+      { name: "Ms. Amirthini", role: "Advisory Board – Finance", img: ABF },
+      { name: "Mr. Baskaran", role: "Advisory Board – Education", img: ABE },
+      { name: "Mr. Janagan", role: "Advisory Board – Premises", img: ABP },
+      { name: "Mr. Anoshan", role: "Advisory Board – Management", img: ABM },
+    ],
+    finance: [
+      {
+        name: "Ms. Keerthika",
+        role: "Finance & Compliance Officer",
+        img: Finance,
+      },
+    ],
+    operationsLabel: "Operations Team: Admin | Field | Support Staff",
+    operations: [
+      { name: "Mr. Sethukanan (Former)", role: "Manager", img: FManger },
+      { name: "Ms. Subasihin", role: "Manager (Associate Principal)" },
+      { name: "Ms. Kema", role: "Teacher" },
+      {
+        name: "Ms. Selvasri Questalla",
+        role: "Manager",
+        img: Manager,
+      },
+      { name: "Mr. Kirujan", role: "Assistant Manager", img: AM1 },
+      { name: "Ms. Kamsika", role: "Executive Trainer", img: EX1 },
+      { name: "Ms. Kajeni", role: "Manager", img: Manager1 },
+      { name: "Ms. Prinsiya", role: "Assistant Manager", img: AM2 },
+      { name: "Mr. Nilavan (Former)", role: "Assistant Manager", img: AM3 },
+      { name: "Mr. Theesikan", role: "Executive Trainer", img: EX2 },
+      { name: "Ms. A Arunya", role: "Executive Trainer", img: EX3 },
+    ],
+  };
+
+  // ✅ reveal animation on scroll
+  useEffect(() => {
+    const els = document.querySelectorAll(".orgReveal");
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach(
+          (e) => e.isIntersecting && e.target.classList.add("show")
+        ),
+      { threshold: 0.18 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div className="orgWrap">
+      {/* TOP: Leadership */}
+      <div className="orgRow orgTop">
+        {data.leadership.map((p, i) => (
+          <OrgNode key={i} person={p} delay={i * 80} />
+        ))}
+      </div>
+
+      {/* Tree branch */}
+      <div className="orgBranch orgReveal">
+        <span className="orgStem" />
+        <span className="orgBar" />
+      </div>
+
+      {/* Advisory boards */}
+      <div className="orgSectionTitle orgReveal">Advisory Boards</div>
+      <div className="orgRow">
+        {data.advisory.map((p, i) => (
+          <OrgNode key={i} person={p} delay={i * 80} />
+        ))}
+      </div>
+
+      {/* Tree stem */}
+      <div className="orgBranch sm orgReveal">
+        <span className="orgStem" />
+      </div>
+
+      {/* Finance & Compliance */}
+      <div className="orgSectionTitle orgReveal">Finance &amp; Compliance</div>
+      <div className="orgRow orgCenter">
+        {data.finance.map((p, i) => (
+          <OrgNode key={i} person={p} delay={i * 80} />
+        ))}
+      </div>
+
+      {/* Tree branch wide */}
+      <div className="orgBranch orgReveal">
+        <span className="orgStem" />
+        <span className="orgBar wide" />
+      </div>
+
+      {/* Operations */}
+      <div className="orgOpsLabel orgReveal">{data.operationsLabel}</div>
+      <div className="orgRow orgOps">
+        {data.operations.map((p, i) => (
+          <OrgNode key={i} person={p} delay={i * 45} compact />
         ))}
       </div>
     </div>
   );
 }
 
-function TeamCard({ name, role, desc, index }) {
-  const ref = useRef(null);
-  const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setShow(true);
-      },
-      { threshold: 0.18 }
-    );
-
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+function OrgNode({ person, delay = 0, compact = false }) {
+  const { name, role, img } = person;
 
   return (
     <div
-      ref={ref}
-      className={`teamCard2 reveal ${show ? "show" : ""}`}
-      style={{ transitionDelay: `${index * 70}ms` }}
+      className={`orgNode orgReveal ${compact ? "compact" : ""}`}
+      style={{ transitionDelay: `${delay}ms` }}
     >
-      <div className="teamAvatar2" />
-      <div className="teamName2">{name}</div>
-      <div className="teamRole2">{role}</div>
-      <div className="teamDesc2">{desc}</div>
+      <div className="orgAvatar">
+        {img ? (
+          <img src={img} alt={name} />
+        ) : (
+          <div className="orgAvatarPlaceholder" />
+        )}
+      </div>
+
+      <div className="orgName">{name}</div>
+      <div className="orgRole">{role}</div>
     </div>
   );
 }

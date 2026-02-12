@@ -607,6 +607,7 @@ section { scroll-margin-top: 92px; }
   gap: 16px;
   justify-content: center;
   align-items: center;
+  
 }
 
 .aboutCircleWrap.sm{
@@ -639,8 +640,8 @@ section { scroll-margin-top: 92px; }
 /* ✅ OPEN: column + 30px gap + bigger circles */
 .aboutCircleGroup.open{
   grid-template-columns: 1fr;   /* ✅ column */
-  gap: 250px;    
-  margin-top: 100px;               /* ✅ 30px gap */
+  gap: 90px;    
+  margin-top: 30px;               /* ✅ 30px gap */
   align-items: start;
   justify-content: center;
 }
@@ -762,9 +763,23 @@ section { scroll-margin-top: 92px; }
   height: 78px;
   border-radius: 999px;
   margin: 0 auto 10px;
-  background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.35), rgba(59,130,246,0.12));
   border: 6px solid rgba(59,130,246,0.25);
+  overflow: hidden;
+  background: #e9f1ff;
 }
+
+/* image inside circle */
+.teamAvatar2 img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.teamAvatar2{
+  width: 160px;
+  height: 160px;
+}
+
 
 .teamName2{
   font-weight: 950;
@@ -881,3 +896,386 @@ section { scroll-margin-top: 92px; }
 
 .footer a{ color: rgba(255,255,255,0.82); text-decoration: none; }
 .footer a:hover{ text-decoration: underline; }
+
+/* =========================
+   Services Strip (after hero)
+========================= */
+.svcStrip{
+  padding: 26px 0;
+  /* ✅ navy that matches your brand blues */
+  background: linear-gradient(180deg, #0f2f57 0%, #0b2545 100%);
+}
+
+.svcStripInner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.svcStripHeader{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.svcStripTitle{
+  margin: 0;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.90);
+  font-size: 18px;
+  text-align: center;
+}
+
+.svcLine{
+  flex: 1;
+  max-width: 220px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.22);
+}
+
+.svcCards{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.svcCard{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.96);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.18);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+}
+
+.svcCard:hover{
+  transform: translateY(-2px);
+  filter: brightness(1.02);
+  box-shadow: 0 18px 38px rgba(0,0,0,0.22);
+}
+
+.svcIcon{
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  background: rgba(59,130,246,0.14);
+  border: 1px solid rgba(59,130,246,0.22);
+}
+
+.svcText{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.svcCardTitle{
+  font-weight: 950;
+  color: #0b1220;
+  font-size: 18px;
+}
+
+.svcCardDesc{
+  color: rgba(11,18,32,0.68);
+  font-weight: 650;
+  line-height: 1.35;
+  font-size: 14px;
+}
+/*  animation polish */
+.svcReveal{
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+
+.svcReveal.show{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover micro animation */
+.svcCard{
+  position: relative;
+}
+
+.svcCard:hover .svcIcon{
+  transform: translateY(-1px) scale(1.04);
+}
+
+.svcIcon{
+  transition: transform .18s ease;
+}
+
+/* Responsive */
+@media (max-width: 980px){
+  .svcCards{
+    grid-template-columns: 1fr;
+  }
+  .svcLine{
+    display: none;
+  }
+  .svcStripTitle{
+    font-size: 16px;
+  }
+}
+/* =========================
+   TEAM TREE (Org Chart) ✅ NEW
+   Paste at BOTTOM of global.css
+========================= */
+
+/* Wrapper */
+.orgWrap{
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* Rows */
+.orgRow{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.orgTop{
+  gap: 34px;
+  margin-bottom: 10px;
+}
+
+.orgCenter{
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.orgOps{
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* Titles */
+.orgSectionTitle{
+  margin: 18px auto 10px;
+  text-align: center;
+  font-weight: 950;
+  letter-spacing: .3px;
+  color: rgba(11,18,32,0.86);
+}
+
+.orgOpsLabel{
+  margin: 18px auto 10px;
+  text-align: center;
+  font-weight: 900;
+  color: rgba(11,18,32,0.72);
+  font-size: 13px;
+}
+
+/* Nodes (cards) */
+.orgNode{
+  width: 240px;               /* ✅ bigger */
+  background: rgba(255,255,255,0.96);
+  border: 2px solid rgba(59,130,246,0.25);
+  border-radius: 18px;
+  padding: 14px 14px 12px;
+  box-shadow: var(--shadow);
+  text-align: center;
+  position: relative;
+}
+
+.orgNode.compact{
+  width: 190px;               /* ✅ bigger compact */
+  border-radius: 16px;
+  padding: 12px 12px 10px;
+}
+
+/* Hover */
+.orgNode:hover{
+  transform: translateY(-2px);
+  transition: transform .18s ease;
+}
+
+/* Avatar (image circle) */
+.orgAvatar{
+  width: 140px;               /* ✅ bigger */
+  height: 140px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 6px solid rgba(59,130,246,0.20);
+  background: rgba(59,130,246,0.08);
+  box-shadow: 0 14px 26px rgba(0,0,0,0.10);
+}
+
+.orgNode.compact .orgAvatar{
+  width: 88px;                /* ✅ bigger compact */
+  height: 88px;
+  border-width: 5px;
+  margin-bottom: 8px;
+}
+
+.orgAvatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* placeholder (if no image) */
+.orgAvatarPlaceholder{
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 30%, rgba(59,130,246,0.30), rgba(59,130,246,0.08));
+}
+
+/* Text */
+.orgName{
+  font-weight: 950;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.orgRole{
+  margin-top: 6px;
+  font-weight: 900;
+  font-size: 12px;
+  color: rgba(59,130,246,0.98);
+  line-height: 1.25;
+}
+
+/* =========================
+   Tree connectors (modern + arrows)
+========================= */
+
+/* Branch block */
+.orgBranch{
+  position: relative;
+  width: min(980px, 92%);
+  height: 52px;
+  margin: 10px auto 6px;
+  display: grid;
+  place-items: center;
+}
+
+.orgBranch.sm{
+  height: 32px;
+}
+
+/* Vertical stem */
+.orgStem{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 52px;
+  background: linear-gradient(180deg, rgba(59,130,246,0.55), rgba(59,130,246,0.18));
+  border-radius: 999px;
+}
+
+.orgBranch.sm .orgStem{
+  height: 32px;
+}
+
+/* Horizontal bar */
+.orgBar{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, 92%);
+  height: 4px;
+  background: linear-gradient(90deg, rgba(59,130,246,0.18), rgba(59,130,246,0.55), rgba(59,130,246,0.18));
+  border-radius: 999px;
+}
+
+.orgBar.wide{
+  width: min(900px, 96%);
+}
+
+/* Side arrows */
+.orgBar::before,
+.orgBar::after{
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid rgba(59,130,246,0.55);
+  border-bottom: 3px solid rgba(59,130,246,0.55);
+  transform: translateY(-50%) rotate(-45deg);
+  border-radius: 2px;
+}
+
+.orgBar::before{
+  left: -2px;
+  transform: translateY(-50%) rotate(135deg); /* left arrow */
+}
+
+.orgBar::after{
+  right: -2px; /* right arrow */
+}
+
+/* =========================
+   Org Chart Reveal Animation
+========================= */
+.orgReveal{
+  opacity: 0;
+  transform: translateY(16px) scale(0.985);
+  transition: opacity .55s ease, transform .55s ease;
+  will-change: opacity, transform;
+}
+
+.orgReveal.show{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* =========================
+   Responsive
+========================= */
+@media (max-width: 980px){
+  .orgRow{ gap: 18px; }
+  .orgTop{ gap: 18px; }
+
+  .orgNode{ width: 220px; }
+  .orgNode.compact{ width: 180px; }
+
+  .orgBar{ width: min(560px, 94%); }
+  .orgBar.wide{ width: min(680px, 96%); }
+}
+
+@media (max-width: 560px){
+  .orgRow{ gap: 14px; }
+
+  .orgNode{ width: 92%; max-width: 360px; }
+  .orgNode.compact{ width: 92%; max-width: 320px; }
+
+  .orgBranch{
+    width: 92%;
+    height: 28px;
+  }
+  .orgStem{ height: 28px; }
+  .orgBar,
+  .orgBar.wide{
+    width: 70%;
+    height: 3px;
+  }
+  .orgBar::before,
+  .orgBar::after{
+    width: 9px;
+    height: 9px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+  }
+}

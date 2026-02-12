@@ -11,9 +11,9 @@ export default function Footer() {
         <div>
           <h4>Get in Touch</h4>
           <ul className="footer__list">
-            <li>📞 021-222 4220</li>
+            <li>📞 021 222 4220 / 021 222 6990</li>
             <li>✉️ info@ramb.lk</li>
-            <li>📍 456 Main Street, Anuradhapur, Sri Lanka</li>
+            <li>📍No 29, Muneeswaran Road, 40000, Jaffna.</li>
           </ul>
         </div>
 
