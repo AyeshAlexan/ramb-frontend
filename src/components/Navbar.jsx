@@ -60,10 +60,20 @@ export default function Navbar() {
     if (!btn) return;
 
     const r = btn.getBoundingClientRect();
+    // prefer a wider menu so long labels don't wrap; clamp to viewport
+    const preferred = Math.max(r.width, 120);
+    const maxAllowed = Math.max(200, window.innerWidth - 24);
+    const width = Math.min(preferred, maxAllowed);
+
+    // keep menu inside viewport horizontally
+    let left = r.left;
+    if (left + width + 12 > window.innerWidth) left = window.innerWidth - width - 5;
+    if (left < 12) left = 12;
+
     setMenuPos({
       top: r.bottom + 10,
-      left: r.left,
-      width: r.width,
+      left,
+      width,
     });
   };
 
@@ -104,8 +114,6 @@ export default function Navbar() {
       <div className="navInner">
         <div className="brand" onClick={() => goSection("home")} role="button" tabIndex={0}>
           <img src={logo} alt="RAMB" className="brandLogo" />
-          
-          <span className="brandText">RAMB</span>
         </div>
 
         <nav className="navLinks" aria-label="Primary">
