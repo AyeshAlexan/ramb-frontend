@@ -1,45 +1,152 @@
-import {motion,} from "framer-motion";
+// src/components/Navbar.jsx
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
-import { NavLink } from "react-router-dom";
 
+export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [pendingScrollId, setPendingScrollId] = useState(null);
 
-export default function Navbar(){
-    return(
-        <header className="topbar">
-            <div className="container topbar__inner">
-                <div className="brand">
-                    <img className="brand__logo" src={logo} alt="RAMB"/>
-                    <span className="brand__name"></span>
-                </div>
+  // dropdown
+  const [homeOpen, setHomeOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-                <div className="topbar__right">
-                    <div className="phone">
-                        <span className="phone__icon">📞</span>
-                        <span className="phone__text">021-222-4220</span>
-                    </div>
-                    
-                    <motion.a
-                       whiteHover={{scale: 1.05}}
-                       whiteTap={{scale: 0.98}}
-                       className="btn btn--gold"
-                       href="#apply"
-                    >
-                        Apply Now 
-                    </motion.a>
-                </div>
+  // dropdown position (fix for overflow clipping)
+  const [menuPos, setMenuPos] = useState({ top: 0, left: 0, width: 180 });
+
+  const scrollToId = (id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const goSection = (id) => {
+    if (location.pathname === "/") {
+      scrollToId(id);
+      return;
+    }
+    setPendingScrollId(id);
+    navigate("/");
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/" && pendingScrollId) {
+      const t = setTimeout(() => scrollToId(pendingScrollId), 120);
+      setPendingScrollId(null);
+      return () => clearTimeout(t);
+    }
+  }, [location.pathname, pendingScrollId]);
+
+  // close dropdown on outside click
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (!dropdownRef.current) return;
+      if (!dropdownRef.current.contains(e.target)) setHomeOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, []);
+
+  // close dropdown on route change
+  useEffect(() => {
+    setHomeOpen(false);
+  }, [location.pathname]);
+
+  // compute dropdown menu position (keep it under the Home button)
+  const updateMenuPos = () => {
+    if (!dropdownRef.current) return;
+    const btn = dropdownRef.current.querySelector(".navLinkDrop");
+    if (!btn) return;
+
+    const r = btn.getBoundingClientRect();
+    setMenuPos({
+      top: r.bottom + 10,
+      left: r.left,
+      width: r.width,
+    });
+  };
+
+  useEffect(() => {
+    if (!homeOpen) return;
+
+    updateMenuPos();
+
+    const onResize = () => updateMenuPos();
+    const onScroll = () => updateMenuPos();
+
+    window.addEventListener("resize", onResize);
+    window.addEventListener("scroll", onScroll, true);
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScroll, true);
+    };
+  }, [homeOpen]);
+
+  const openHomeAndMaybeGo = () => {
+    setHomeOpen((v) => !v);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+    } else {
+      scrollToId("home");
+    }
+  };
+
+  const homeItem = (sectionId) => {
+    setHomeOpen(false);
+    goSection(sectionId);
+  };
+
+  return (
+    <header className="navWrap">
+      <div className="navInner">
+        <div className="brand" onClick={() => goSection("home")} role="button" tabIndex={0}>
+          <img src={logo} alt="RAMB" className="brandLogo" />
+          
+          <span className="brandText">RAMB</span>
+        </div>
+
+        <nav className="navLinks" aria-label="Primary">
+          {/* HOME DROPDOWN */}
+          <div className={`navDrop ${homeOpen ? "open" : ""}`} ref={dropdownRef}>
+            <button
+              className="navLink navLinkDrop"
+              onClick={openHomeAndMaybeGo}
+              aria-haspopup="menu"
+              aria-expanded={homeOpen}
+              type="button"
+            >
+              Home <span className="caret">▾</span>
+            </button>
+
+            <div
+              className="navMenu"
+              role="menu"
+              style={{ top: menuPos.top, left: menuPos.left, width: menuPos.width }}
+            >
+              <button className="navMenuItem" type="button" onClick={() => homeItem("about")} role="menuitem">
+                About Us
+              </button>
+              <button className="navMenuItem" type="button" onClick={() => homeItem("contact")} role="menuitem">
+                Contact Us
+              </button>
             </div>
+          </div>
 
-           <nav className="nav">
-  <div className="container nav__inner">
-    <NavLink to="/" className="nav__link">Home</NavLink>
-    <NavLink to="/loans" className="nav__link">Loans</NavLink>
-    <NavLink to="/education" className="nav__link">Education Support</NavLink>
-    <NavLink to="/travel" className="nav__link">Travel & Transport</NavLink>
-    <NavLink to="/gold-plus" className="nav__link">Gold plus</NavLink>
-    <NavLink to="/contact" className="nav__link">Contact</NavLink>
-  </div>
-</nav>
+          {/* OTHER PAGES */}
+          <button className="navLink" onClick={() => navigate("/loans")} type="button">Loans</button>
+          <button className="navLink" onClick={() => navigate("/education-support")} type="button">Education Support</button>
+          <button className="navLink" onClick={() => navigate("/travel-transport")} type="button">Travel &amp; Transport</button>
+          <button className="navLink" onClick={() => navigate("/gold-plus")} type="button">Gold Plus</button>
+        </nav>
 
-        </header>
-    );
+        <div className="navActions">
+          <a className="navPhone" href="tel:0212224220">📞 021-222-4220</a>
+          <button className="navBtn" onClick={() => goSection("contact")} type="button">Apply Now</button>
+        </div>
+      </div>
+    </header>
+  );
 }
