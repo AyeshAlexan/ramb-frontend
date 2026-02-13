@@ -27,10 +27,33 @@ import AM3 from "../assets/our team/Assistant Manager3.jpeg";
 import EX2 from "../assets/our team/Executive trainer2.jpeg";
 import EX3 from "../assets/our team/Executive trainer3.jpeg";
 
+// ✅ Loans images
+import personalImg from "../assets/personal.jpg";
+import businessImg from "../assets/business.jpg";
+import educationImg from "../assets/education.jpeg";
+
+// ✅ GOLD PLUS IMAGE (THIS FIXES YOUR ISSUE)
+import goldPlusImg from "../assets/gold-plus.jpg"; // <-- make sure this file exists with this exact name
+
 export default function Home() {
   const [open, setOpen] = useState(false);
 
-  // ✅ reveal animation for service strip
+  // ✅ reveal animation for loans
+  useEffect(() => {
+    const els = document.querySelectorAll(".loanReveal");
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) e.target.classList.add("show");
+        });
+      },
+      { threshold: 0.18 }
+    );
+    els.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  // ✅ reveal animation for service strip + gold plus (uses svcReveal)
   useEffect(() => {
     const els = document.querySelectorAll(".svcReveal");
     const io = new IntersectionObserver(
@@ -53,12 +76,10 @@ export default function Home() {
         <div className="heroFullImgWrap">
           <img className="heroFullImg" src={heroImg} alt="Hero" />
 
-          {/* overlays */}
           <div className="heroFadeLeft" />
           <div className="heroDiagLight" />
           <div className="heroDiagShade" />
 
-          {/* text on top */}
           <div className="heroFullContent">
             <span className="lpPill">Trusted &amp; Professional Support</span>
 
@@ -88,48 +109,49 @@ export default function Home() {
       {/* SERVICES STRIP */}
       <section className="svcStrip">
         <div className="svcStripInner">
-          <div className="svcStripHeader reveal svcReveal">
+          <div className="svcStripHeader svcReveal">
             <span className="svcLine" />
-            <h3 className="svcStripTitle">Not a Bank: Supporting Your Dreams.</h3>
+            <h3 className="svcStripTitle">
+              Not a Bank: Supporting Your Dreams.
+            </h3>
             <span className="svcLine" />
           </div>
 
           <div className="svcCards">
-            <div
-              className="svcCard reveal svcReveal"
-              style={{ transitionDelay: "0ms" }}
-            >
+            <div className="svcCard svcReveal" style={{ transitionDelay: "0ms" }}>
               <div className="svcIcon">🤝</div>
               <div className="svcText">
                 <div className="svcCardTitle">Personal Loans</div>
                 <div className="svcCardDesc">
-                  Flexible personal loans for any need.
+                  Our professional personal loan solutions offer strategic capital required to manage life’s diverse
+                  financial requirements. Whether you are consolidating debt or funding a major investment,
+                  we provide bespoke repayment terms and competitive rates designed to support your long-term
+                  fiscal health.
                 </div>
               </div>
             </div>
 
-            <div
-              className="svcCard reveal svcReveal"
-              style={{ transitionDelay: "90ms" }}
-            >
+            <div className="svcCard svcReveal" style={{ transitionDelay: "90ms" }}>
               <div className="svcIcon">🏪</div>
               <div className="svcText">
                 <div className="svcCardTitle">SME Loans</div>
                 <div className="svcCardDesc">
-                  Funding solutions for businesses.
+                  Our comprehensive suite of funding solutions provides the strategic capital necessary to drive business growth and operational excellence. From scaling infrastructure to
+                  managing short-term liquidity, we offer tailored financial instruments designed to align with
+                  your organization’s long-term objectives and vision.
                 </div>
               </div>
             </div>
 
-            <div
-              className="svcCard reveal svcReveal"
-              style={{ transitionDelay: "180ms" }}
-            >
+            <div className="svcCard svcReveal" style={{ transitionDelay: "180ms" }}>
               <div className="svcIcon">💰</div>
               <div className="svcText">
                 <div className="svcCardTitle">Pawn Loans</div>
                 <div className="svcCardDesc">
-                  Instant cash for your gold &amp; valuables.
+                  Access immediate capital by leveraging the inherent value of your precious metals and high-end
+                  collectibles. Our firm offers a discreet, expert appraisal process designed to provide
+                  competitive market rates and instantaneous settlement, ensuring your liquidity
+                  needs are met with professionalism.
                 </div>
               </div>
             </div>
@@ -150,34 +172,23 @@ export default function Home() {
           </div>
 
           <div className="aboutGrid">
-            {/* LEFT: Circle Images + fade in */}
             <AboutReveal>
               <div className="aboutLeft">
                 <div className={`aboutCircleGroup ${open ? "open" : ""}`}>
                   <div className="aboutCircleWrap sm">
-                    <img
-                      src={aboutImg1}
-                      alt="About 1"
-                      className="aboutCircleImg"
-                    />
+                    <img src={aboutImg1} alt="About 1" className="aboutCircleImg" />
                   </div>
 
                   <div className="aboutCircleWrap sm">
-                    <img
-                      src={aboutImg2}
-                      alt="About 2"
-                      className="aboutCircleImg"
-                    />
+                    <img src={aboutImg2} alt="About 2" className="aboutCircleImg" />
                   </div>
                 </div>
               </div>
             </AboutReveal>
 
-            {/* RIGHT */}
             <div className="aboutRight">
               <h3 className="aboutTitle">About RAMB</h3>
 
-              {/* Top paragraph card */}
               <div className="aboutOutlineCard">
                 <p className="aboutText">
                   Reliable Asset Management &amp; Business (RAMB) represents a
@@ -189,7 +200,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* View More button only when closed */}
               {!open && (
                 <button
                   className="lpBtnPrimary aboutToggleBtn"
@@ -201,7 +211,6 @@ export default function Home() {
                 </button>
               )}
 
-              {/* Slide-down content (About ONLY) */}
               <div id="about-more" className={`aboutMore ${open ? "open" : ""}`}>
                 <div className="aboutMoreInner">
                   <div className="aboutMoreCard">
@@ -229,27 +238,128 @@ export default function Home() {
                     </p>
                   </div>
 
-                  {/* Bottom actions */}
                   <div className="aboutMoreActions">
-                    <a className="lpBtnPrimary" href="#contact">
-                      Contact
-                    </a>
-                    <button
-                      className="lpBtnGhost"
-                      onClick={() => setOpen(false)}
-                    >
+                    <a className="lpBtnPrimary" href="#contact">Contact</a>
+                    <button className="lpBtnGhost" onClick={() => setOpen(false)}>
                       Show Less
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* Link to team */}
               <div style={{ marginTop: 14 }}>
-                <a className="lpBtnGhost" href="#team">
-                  Meet Our Team →
-                </a>
+                <a className="lpBtnGhost" href="#team">Meet Our Team →</a>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LOANS DETAILS */}
+      <section id="loan-details" className="loanDetails">
+        <div className="loanDetailsInner">
+          <div className="lpTopCenter">
+            <div className="lpKicker">LOANS</div>
+            <h2 className="lpH2">Loan Details</h2>
+            <p className="lpCenterText">
+              Simple, transparent options designed to match your needs — personal goals,
+              business growth, and education support.
+            </p>
+          </div>
+
+          <div className="loanRow loanReveal">
+            <div className="loanMedia">
+              <img src={personalImg} alt="Personal Loan" className="loanImg" />
+            </div>
+            <div className="loanContent">
+              <h3 className="loanTitle">Personal Loans</h3>
+              <p className="loanText">
+                Flexible personal loans for urgent needs, life events, or planned expenses.
+                Clear documentation, friendly guidance, and a smooth approval process.
+              </p>
+              <ul className="loanList">
+                <li>Fast processing with clear steps</li>
+                <li>Flexible repayment options</li>
+                <li>Supportive customer guidance</li>
+              </ul>
+              <div className="loanActions">
+                <a className="lpBtnPrimary" href="/loans">Learn More →</a>
+                <a className="lpBtnGhost" href="#contact">Contact</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="loanRow reverse loanReveal">
+            <div className="loanMedia">
+              <img src={businessImg} alt="Business Loan" className="loanImg" />
+            </div>
+            <div className="loanContent">
+              <h3 className="loanTitle">Business Loans</h3>
+              <p className="loanText">
+                Funding solutions for small and medium businesses — to expand operations,
+                manage cash flow, or invest in growth with confidence.
+              </p>
+              <ul className="loanList">
+                <li>Business-friendly plans</li>
+                <li>Guidance for documentation</li>
+                <li>Support for growth & stability</li>
+              </ul>
+              <div className="loanActions">
+                <a className="lpBtnPrimary" href="/loans">Learn More →</a>
+                <a className="lpBtnGhost" href="#contact">Contact</a>
+              </div>
+            </div>
+          </div>
+
+          <div className="loanRow loanReveal">
+            <div className="loanMedia">
+              <img src={educationImg} alt="Education Loan" className="loanImg" />
+            </div>
+            <div className="loanContent">
+              <h3 className="loanTitle">Education Loans</h3>
+              <p className="loanText">
+                Support for education-related costs — courses, training, and professional
+                development. Build your future with structured and reliable assistance.
+              </p>
+              <ul className="loanList">
+                <li>Student & professional pathways</li>
+                <li>Clear and supportive process</li>
+                <li>Focused on long-term value</li>
+              </ul>
+              <div className="loanActions">
+                <a className="lpBtnPrimary" href="/loans">Learn More →</a>
+                <a className="lpBtnGhost" href="#contact">Contact</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ✅ GOLD PLUS SECTION (FIXED IMAGE) */}
+      <section className="goldPlus">
+        <div className="goldPlusGrid">
+          <div className="goldPlusImgWrap svcReveal">
+            <img src={goldPlusImg} alt="Gold Plus" className="goldPlusImg" />
+          </div>
+
+          <div className="goldPlusContent svcReveal">
+            <div className="goldPlusKicker">GOLD PLUS</div>
+
+            <h2 className="goldPlusTitle">
+              Premium Gold-Backed <span className="lpAccent">Support</span>
+            </h2>
+
+            <p className="goldPlusText">
+              Gold Plus is our enhanced gold-backed support program designed for
+              customers who need fast access to funds with secure asset handling and
+              premium service care. We provide fair valuation, quick processing,
+              transparent terms, and flexible settlement options — all with trusted
+              professional guidance.
+            </p>
+
+            <div className="goldPlusBtns">
+              <a href="/gold-plus" className="lpBtnPrimary">Explore Gold Plus</a>
+              <a href="#contact" className="lpBtnGhost">Speak to Advisor</a>
             </div>
           </div>
         </div>
@@ -270,12 +380,8 @@ export default function Home() {
           <OrgChart />
 
           <div className="aboutMoreActions" style={{ marginTop: 20 }}>
-            <a className="lpBtnPrimary" href="#contact">
-              Contact
-            </a>
-            <a className="lpBtnGhost" href="#home">
-              Back to Top
-            </a>
+            <a className="lpBtnPrimary" href="#contact">Contact</a>
+            <a className="lpBtnGhost" href="#home">Back to Top</a>
           </div>
         </div>
       </section>
@@ -342,7 +448,7 @@ export default function Home() {
 }
 
 /* ---------------------------
-   Helpers (same file)
+   Helpers
 ---------------------------- */
 
 function AboutReveal({ children }) {
@@ -372,27 +478,15 @@ function AboutReveal({ children }) {
 }
 
 /* ---------------------------
-   Org Chart (Tree Diagram)
+   Org Chart
 ---------------------------- */
 
 function OrgChart() {
   const data = {
     leadership: [
-      {
-        name: "Mrs. M. Abreame",
-        role: "Founder & Principal Investor",
-        img: founder,
-      },
-      {
-        name: "Mr. V. Thillainadarajah",
-        role: "Chief Executive Officer (CEO)",
-        img: director,
-      },
-      {
-        name: "Mrs. T. Thillainadarajah",
-        role: "Chief Operating Officer (COO)",
-        img: Chief,
-      },
+      { name: "Mrs. M. Abreame", role: "Founder & Principal Investor", img: founder },
+      { name: "Mr. V. Thillainadarajah", role: "Chief Executive Officer (CEO)", img: director },
+      { name: "Mrs. T. Thillainadarajah", role: "Chief Operating Officer (COO)", img: Chief },
     ],
     advisory: [
       { name: "Ms. Amirthini", role: "Advisory Board – Finance", img: ABF },
@@ -400,23 +494,13 @@ function OrgChart() {
       { name: "Mr. Janagan", role: "Advisory Board – Premises", img: ABP },
       { name: "Mr. Anoshan", role: "Advisory Board – Management", img: ABM },
     ],
-    finance: [
-      {
-        name: "Ms. Keerthika",
-        role: "Finance & Compliance Officer",
-        img: Finance,
-      },
-    ],
+    finance: [{ name: "Ms. Keerthika", role: "Finance & Compliance Officer", img: Finance }],
     operationsLabel: "Operations Team: Admin | Field | Support Staff",
     operations: [
       { name: "Mr. Sethukanan (Former)", role: "Manager", img: FManger },
       { name: "Ms. Subasihin", role: "Manager (Associate Principal)" },
       { name: "Ms. Kema", role: "Teacher" },
-      {
-        name: "Ms. Selvasri Questalla",
-        role: "Manager",
-        img: Manager,
-      },
+      { name: "Ms. Selvasri Questalla", role: "Manager", img: Manager },
       { name: "Mr. Kirujan", role: "Assistant Manager", img: AM1 },
       { name: "Ms. Kamsika", role: "Executive Trainer", img: EX1 },
       { name: "Ms. Kajeni", role: "Manager", img: Manager1 },
@@ -427,14 +511,10 @@ function OrgChart() {
     ],
   };
 
-  // ✅ reveal animation on scroll
   useEffect(() => {
     const els = document.querySelectorAll(".orgReveal");
     const io = new IntersectionObserver(
-      (entries) =>
-        entries.forEach(
-          (e) => e.isIntersecting && e.target.classList.add("show")
-        ),
+      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("show")),
       { threshold: 0.18 }
     );
     els.forEach((el) => io.observe(el));
@@ -443,47 +523,34 @@ function OrgChart() {
 
   return (
     <div className="orgWrap">
-      {/* TOP: Leadership */}
       <div className="orgRow orgTop">
-        {data.leadership.map((p, i) => (
-          <OrgNode key={i} person={p} delay={i * 80} />
-        ))}
+        {data.leadership.map((p, i) => <OrgNode key={i} person={p} delay={i * 80} />)}
       </div>
 
-      {/* Tree branch */}
       <div className="orgBranch orgReveal">
         <span className="orgStem" />
         <span className="orgBar" />
       </div>
 
-      {/* Advisory boards */}
       <div className="orgSectionTitle orgReveal">Advisory Boards</div>
       <div className="orgRow">
-        {data.advisory.map((p, i) => (
-          <OrgNode key={i} person={p} delay={i * 80} />
-        ))}
+        {data.advisory.map((p, i) => <OrgNode key={i} person={p} delay={i * 80} />)}
       </div>
 
-      {/* Tree stem */}
       <div className="orgBranch sm orgReveal">
         <span className="orgStem" />
       </div>
 
-      {/* Finance & Compliance */}
       <div className="orgSectionTitle orgReveal">Finance &amp; Compliance</div>
       <div className="orgRow orgCenter">
-        {data.finance.map((p, i) => (
-          <OrgNode key={i} person={p} delay={i * 80} />
-        ))}
+        {data.finance.map((p, i) => <OrgNode key={i} person={p} delay={i * 80} />)}
       </div>
 
-      {/* Tree branch wide */}
       <div className="orgBranch orgReveal">
         <span className="orgStem" />
         <span className="orgBar wide" />
       </div>
 
-      {/* Operations */}
       <div className="orgOpsLabel orgReveal">{data.operationsLabel}</div>
       <div className="orgRow orgOps">
         {data.operations.map((p, i) => (
@@ -503,13 +570,8 @@ function OrgNode({ person, delay = 0, compact = false }) {
       style={{ transitionDelay: `${delay}ms` }}
     >
       <div className="orgAvatar">
-        {img ? (
-          <img src={img} alt={name} />
-        ) : (
-          <div className="orgAvatarPlaceholder" />
-        )}
+        {img ? <img src={img} alt={name} /> : <div className="orgAvatarPlaceholder" />}
       </div>
-
       <div className="orgName">{name}</div>
       <div className="orgRole">{role}</div>
     </div>

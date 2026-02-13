@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/LoansPage.css";
+import "../styles/LoansPage.css";
 
 // change these paths to your real images
 import personalImg from "../assets/personal.jpg";
