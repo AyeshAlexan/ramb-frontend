@@ -35,6 +35,10 @@ import educationImg from "../assets/education.jpeg";
 // ✅ GOLD PLUS IMAGE (THIS FIXES YOUR ISSUE)
 import goldPlusImg from "../assets/gold-plus.jpg"; // <-- make sure this file exists with this exact name
 
+// ✅ Eduction Logo Marquee
+import LogoMarquee from "../components/LogoMarquee";
+
+
 export default function Home() {
   const [open, setOpen] = useState(false);
 
@@ -365,6 +369,19 @@ export default function Home() {
         </div>
       </section>
 
+       {/* Eduaction LogoMarquee */}
+      <LogoMarquee
+        speed={30}
+      />
+      <section className="marqueeSection">
+        <div className="marqueeBtns">
+            <a href="/education-support" className="lpBtnPrimary">
+               Learn More →
+           </a>
+        </div>
+      </section>
+      
+       
       {/* TEAM (TREE DIAGRAM) */}
       <section id="team" className="lpSection lpSectionAlt">
         <div className="lpSectionInner">

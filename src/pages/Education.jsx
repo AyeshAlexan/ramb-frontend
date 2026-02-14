@@ -3,6 +3,9 @@ import styles from "../styles/EducationSupport.css";
 
 import heroImg from "../assets/education-support.png";
 
+//Eduction Logo Marquee
+import LogoMarquee from "../components/LogoMarquee";
+
 export default function EducationSupport() {
   return (
     <div className="eduPage">
@@ -35,6 +38,11 @@ export default function EducationSupport() {
           </div>
         </div>
       </section>
+
+       {/* Eduaction LogoMarquee */}
+      <LogoMarquee
+        speed={30}
+      />
     </div>
   );
 }

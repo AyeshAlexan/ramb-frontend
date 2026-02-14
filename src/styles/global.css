@@ -1513,3 +1513,13 @@ section { scroll-margin-top: 92px; }
     font-size: 30px;
   }
 }
+/* =========================
+   Eduction "view more button" layout
+========================= */
+.marqueeBtns {
+  margin-top: -60px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}

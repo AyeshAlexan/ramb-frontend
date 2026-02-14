@@ -6,6 +6,8 @@ import personalImg from "../assets/personal.jpg";
 import businessImg from "../assets/business.jpg";
 import educationImg from "../assets/education.jpeg";
 
+
+
 const loanCards = [
   {
     id: "personal",
