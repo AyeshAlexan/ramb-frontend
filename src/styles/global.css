@@ -61,7 +61,6 @@ section { scroll-margin-top: 92px; }
   z-index: 50;
   background: rgba(247, 250, 255, 0.86);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
 .navInner{
