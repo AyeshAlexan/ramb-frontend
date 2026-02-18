@@ -91,16 +91,20 @@
   gap: 10px;
   font-size: 14px;
 }
+.footer-center span{
+  font-weight: bold;
+}
 
 .footer-center img {
   width: 80px;
 }
 
-.footer-center .footer-link-btn {
+.footer-center a {
   color: #ffffff;
   display: flex;
   align-items: center;
   gap: 8px;
+  font-weight:bold;
   text-decoration: none;
 }
 
@@ -112,6 +116,7 @@
 .footer-right {
   font-size: 14px;
   color: #cfd6ff;
+  font-weight: bold;
 }
 
 /* RESPONSIVE */
