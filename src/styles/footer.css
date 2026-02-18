@@ -34,17 +34,17 @@
   padding: 0;
 }
 
-.footer-col ul li {
+.footer-col ul .footer-link-btn {
   margin-bottom: 12px;
 }
 
-.footer-col ul li a {
+.footer-col ul li .footer-link-btn {
   color: #cfd6ff;
   text-decoration: none;
   transition: 0.3s;
 }
 
-.footer-col ul li a:hover {
+.footer-col ul li .footer-link-btn:hover {
   color: #4da6ff;
   padding-left: 5px;
 }
@@ -79,7 +79,7 @@
   transition: 0.3s;
 }
 
-.social-icons a:hover {
+.social-icons .footer-link-btn:hover {
   background: #4da6ff;
   border-color: #4da6ff;
 }
@@ -96,7 +96,7 @@
   width: 80px;
 }
 
-.footer-center a {
+.footer-center .footer-link-btn {
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -124,4 +124,20 @@
     flex-direction: column;
     text-align: center;
   }
+}
+.footer-link-btn {
+  background: none;
+  border: none;
+  color: inherit; /* Takes the color of your footer text */
+  font: inherit; /* Takes the font of your footer */
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  display: block;
+  margin-bottom: 8px; /* Matches your list spacing */
+}
+
+.footer-link-btn:hover {
+  text-decoration: underline;
+  color: #2563eb; /* Or your preferred brand blue */
 }

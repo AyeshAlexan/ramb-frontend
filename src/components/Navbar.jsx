@@ -100,6 +100,7 @@ export default function Navbar() {
         <div className={`mobileDrawer ${mobileOpen ? "show" : ""}`}>
           <p onClick={() => { goSection("home"); setMobileOpen(false); }}>Home</p>
           <p onClick={() => { goSection("about"); setMobileOpen(false); }}>About Us</p>
+          <p onClick={() => {navigate("/loans"); setMobileOpen(false);}}>Loans</p>
           <p onClick={() => { navigate("/education-support"); setMobileOpen(false); }}>Education Support</p>
           <p onClick={() => { navigate("/travel-transport"); setMobileOpen(false); }}>Travel & Transport</p>
           <p onClick={() => { navigate("/gold-plus"); setMobileOpen(false); }}>Gold Plus</p>

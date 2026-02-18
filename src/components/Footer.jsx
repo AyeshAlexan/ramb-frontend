@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate, useLocation} from "react-router-dom";
 import "../styles/footer.css";
 import {FaFacebookF, FaInstagram} from "react-icons/fa";
 
@@ -6,6 +7,25 @@ import rambLogo from "../assets/logo.png";
 import smaertOmegaLogo from "../assets/smart.png";
 
 const Footer =() =>{
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  //Logic to handle smooth scrolling to sections
+    const scrollTold = (id) =>{
+      const el = document.getElementById(id);
+      if(!el) return;
+      el.scrollIntoView({behavior: "smooth", block: "start"});
+    };
+
+    const goSection = (id) => {
+      if(location.pathname === "/"){
+        scrollTold(id);
+      }else{
+        //If not on home page, navigate home with state to trigger scroll
+        navigate("/", {state: {targetId: id}});
+      }
+    };
+
   return(
   <footer className="footer">
 
@@ -37,27 +57,26 @@ const Footer =() =>{
       <div className="footer-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="/">Home</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/education">Education Support</a></li>
-            <li><a href="/loans">Loans</a></li>
-            <li><a href="/gold">Gold Plus</a></li>
-            <li><a href="/contact">Contact Us</a></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/")}>Home</button></li>
+            <li><button className="footer-link-btn" onClick={() => goSection("about")}>About Us</button></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/education-support")}>Education Support</button></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/loans")}>Loans</button></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/gold-plus")}>Gold Plus</button></li>
+            <li><button className="footer-link-btn" onClick={() => goSection("contact")}>Contact Us</button></li>
         </ul>
       </div>
       
       {/* RIGHT */}
-      <div className="footer-col">
-        <h4>Information</h4>
-        <ul>
-            <li><a href="/terms">Terms & Conditions</a></li>
-            <li><a href="/privacy">Privacy Policy</a></li>
-            <li><a href="/topup">Cash Top Up</a></li>
-            <li><a href="/gold-price">Live Gold Price</a></li>
+     <div className="footer-col">
+          <h4>Information</h4>
+          <ul>
+            <li><button className="footer-link-btn" onClick={() => navigate("/terms")}>Terms & Conditions</button></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/privacy")}>Privacy Policy</button></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/topup")}>Cash Top Up</button></li>
+            <li><button className="footer-link-btn" onClick={() => navigate("/gold-price")}>Live Gold Price</button></li>
           </ul>
+        </div>
       </div>
-
-    </div>
     {/*DIVIDER */}
     <div className="footer-divider"></div>
     {/*BOTTOM */}
