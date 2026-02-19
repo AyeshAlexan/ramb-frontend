@@ -27,6 +27,29 @@ export default function Navbar() {
     }
   };
 
+  // Fixed Dropdown Positioning Logic
+  const updateMenuPos = () => {
+    if (!dropdownRef.current) return;
+    const btn = dropdownRef.current.querySelector(".navLinkDrop");
+    if (!btn) return;
+    
+    const rect = btn.getBoundingClientRect();
+    // This aligns the dropdown exactly with the left edge of the Home button
+    setMenuPos({ 
+      top: rect.bottom + window.scrollY + 5, 
+      left: rect.left + window.scrollX, 
+      width: 180 
+    });
+  };
+
+  useEffect(() => {
+    if (homeOpen) {
+      updateMenuPos();
+      window.addEventListener("resize", updateMenuPos);
+    }
+    return () => window.removeEventListener("resize", updateMenuPos);
+  }, [homeOpen]);
+
   useEffect(() => {
     if (location.pathname === "/" && pendingScrollId) {
       const t = setTimeout(() => scrollToId(pendingScrollId), 120);
@@ -59,15 +82,13 @@ export default function Navbar() {
           <img src={logo} alt="RAMB" className="brandLogo" />
         </div>
 
-        {/* MOBILE TOP BAR (Phone/Apply now added to middle) */}
+        {/* MOBILE TOP BAR */}
         <div className="mobileTopBar">
           <img src={logo} alt="RAMB" className="mobileLogo" onClick={() => goSection("home")} />
-          
           <div className="mobileMiddleActions">
              <a className="mobileNavPhone" href="tel:0212224220">📞 021-222-4220</a>
              <button className="mobileNavBtn" onClick={() => goSection("contact")}>Apply Now</button>
           </div>
-          
           <div className={`hamburger ${mobileOpen ? "open" : ""}`} onClick={() => setMobileOpen(!mobileOpen)}>
             <span /><span /><span />
           </div>
@@ -79,10 +100,13 @@ export default function Navbar() {
             <button className="navLink navLinkDrop" onClick={() => setHomeOpen(!homeOpen)}>
               Home <span className="caret">▾</span>
             </button>
-            <div className="navMenu" style={{ top: menuPos.top, left: menuPos.left, width: menuPos.width }}>
-              <button className="navMenuItem" onClick={() => { setHomeOpen(false); goSection("about"); }}>About Us</button>
-              <button className="navMenuItem" onClick={() => { setHomeOpen(false); goSection("contact"); }}>Contact Us</button>
-            </div>
+            {/* The absolute positioning now uses the calculated menuPos */}
+            {homeOpen && (
+              <div className="navMenu" style={{ position: 'fixed', top: menuPos.top, left: menuPos.left, width: menuPos.width }}>
+                <button className="navMenuItem" onClick={() => { setHomeOpen(false); goSection("about"); }}>About Us</button>
+                <button className="navMenuItem" onClick={() => { setHomeOpen(false); goSection("contact"); }}>Contact Us</button>
+              </div>
+            )}
           </div>
           <button className="navLink" onClick={() => navigate("/loans")}>Loans</button>
           <button className="navLink" onClick={() => navigate("/education-support")}>Education Support</button>
